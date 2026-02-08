@@ -10,6 +10,7 @@ const STORAGE_KEYS = {
   IA_PROJECTS: 'ib_ia_projects',
   EE_PROJECT: 'ib_ee_project',
   TOK_WORKSPACE: 'ib_tok_workspace',
+  CAS_LOGS: 'ib_cas_logs',
 };
 
 function load(key) {
@@ -346,4 +347,33 @@ export function saveTOKWorkspace(workspace) {
   }
   save(STORAGE_KEYS.TOK_WORKSPACE, [payload]);
   return payload;
+}
+
+// --- CAS Logs ---
+
+export function getCASLogs() {
+  return load(STORAGE_KEYS.CAS_LOGS);
+}
+
+export function saveCASLog(entry) {
+  const logs = getCASLogs();
+  const index = logs.findIndex((l) => l.id === entry.id);
+  if (index >= 0) {
+    logs[index] = { ...entry, updatedAt: new Date().toISOString() };
+  } else {
+    logs.push({
+      ...entry,
+      id: entry.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.CAS_LOGS, logs);
+  return logs;
+}
+
+export function deleteCASLog(id) {
+  const logs = getCASLogs().filter((l) => l.id !== id);
+  save(STORAGE_KEYS.CAS_LOGS, logs);
+  return logs;
 }
