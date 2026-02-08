@@ -19,6 +19,7 @@ import TaskManager from './pages/TaskManager';
 import SubjectList from './pages/SubjectList';
 import SubjectPage from './pages/SubjectPage';
 import PastPaperPractice from './pages/PastPaperPractice';
+import CommandTerms from './pages/CommandTerms';
 import './App.css';
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="subjects" element={<SubjectList />} />
           <Route path="subjects/:id" element={<SubjectPage />} />
           <Route path="past-papers" element={<PastPaperPractice />} />
+          <Route path="command-terms" element={<CommandTerms />} />
           <Route path="ia" element={<IAHub />} />
           <Route path="ee" element={<EEHub />} />
           <Route path="tok" element={<TOKHub />} />

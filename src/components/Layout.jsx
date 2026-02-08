@@ -7,6 +7,7 @@ import {
   User,
   GraduationCap,
   FileCheck,
+  Sigma,
   CalendarCheck,
 } from 'lucide-react';
 
@@ -53,6 +54,12 @@ export default function Layout() {
             <NavLink to="/past-papers">
               <FileCheck size={20} />
               <span>Past Papers</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/command-terms">
+              <Sigma size={20} />
+              <span>Command Terms</span>
             </NavLink>
           </li>
           <li>
