@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { BookOpen, Layers, ClipboardList, Home } from 'lucide-react';
+import { BookOpen, Layers, ClipboardList, Home, User } from 'lucide-react';
 
 export default function Layout() {
   return (
@@ -35,6 +35,16 @@ export default function Layout() {
             </NavLink>
           </li>
         </ul>
+        <div className="nav-bottom">
+          <ul className="nav-links">
+            <li>
+              <NavLink to="/about">
+                <User size={20} />
+                <span>About</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </nav>
       <main className="main-content">
         <Outlet />

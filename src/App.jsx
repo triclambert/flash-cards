@@ -10,6 +10,7 @@ import GuideViewer from './pages/GuideViewer';
 import TestList from './pages/TestList';
 import TestEditor from './pages/TestEditor';
 import TestTaker from './pages/TestTaker';
+import About from './pages/About';
 import './App.css';
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="tests" element={<TestList />} />
           <Route path="tests/:id" element={<TestEditor />} />
           <Route path="tests/:id/take" element={<TestTaker />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </BrowserRouter>
