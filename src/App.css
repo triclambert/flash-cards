@@ -438,6 +438,35 @@ body {
   font-size: 0.85rem;
 }
 
+/* ===== Search ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.6rem 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.search-bar .input {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.search-bar .input:focus {
+  outline: none;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
 /* ===== Card Grid ===== */
 .card-grid {
   display: grid;

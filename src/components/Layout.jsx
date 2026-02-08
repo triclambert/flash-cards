@@ -14,6 +14,7 @@ import {
   BarChart3,
   FileText,
   CheckCircle,
+  Search,
 } from 'lucide-react';
 
 export default function Layout() {
@@ -29,6 +30,12 @@ export default function Layout() {
             <NavLink to="/" end>
               <Home size={20} />
               <span>Dashboard</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/search">
+              <Search size={20} />
+              <span>Search</span>
             </NavLink>
           </li>
           <li>

@@ -25,6 +25,7 @@ import StudyPlanner from './pages/StudyPlanner';
 import ProgressAnalytics from './pages/ProgressAnalytics';
 import Templates from './pages/Templates';
 import CASProgress from './pages/CASProgress';
+import Search from './pages/Search';
 import './App.css';
 
 export default function App() {
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="analytics" element={<ProgressAnalytics />} />
           <Route path="templates" element={<Templates />} />
           <Route path="cas-progress" element={<CASProgress />} />
+          <Route path="search" element={<Search />} />
           <Route path="ia" element={<IAHub />} />
           <Route path="ee" element={<EEHub />} />
           <Route path="tok" element={<TOKHub />} />
