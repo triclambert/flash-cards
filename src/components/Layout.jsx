@@ -12,6 +12,7 @@ import {
   Clock,
   Timer,
   BarChart3,
+  FileText,
 } from 'lucide-react';
 
 export default function Layout() {
@@ -51,6 +52,12 @@ export default function Layout() {
             <NavLink to="/analytics">
               <BarChart3 size={20} />
               <span>Analytics</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/templates">
+              <FileText size={20} />
+              <span>Templates</span>
             </NavLink>
           </li>
           <li>
