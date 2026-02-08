@@ -1,5 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { BookOpen, Layers, ClipboardList, Home, User } from 'lucide-react';
+import {
+  BookOpen,
+  Layers,
+  ClipboardList,
+  Home,
+  User,
+  GraduationCap,
+  FileCheck,
+  CalendarCheck,
+} from 'lucide-react';
 
 export default function Layout() {
   return (
@@ -32,6 +41,24 @@ export default function Layout() {
             <NavLink to="/tests">
               <ClipboardList size={20} />
               <span>Practice Tests</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/subjects">
+              <GraduationCap size={20} />
+              <span>Subjects</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/past-papers">
+              <FileCheck size={20} />
+              <span>Past Papers</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/tasks">
+              <CalendarCheck size={20} />
+              <span>Deadlines</span>
             </NavLink>
           </li>
         </ul>

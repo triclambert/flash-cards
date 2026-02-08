@@ -11,6 +11,14 @@ import TestList from './pages/TestList';
 import TestEditor from './pages/TestEditor';
 import TestTaker from './pages/TestTaker';
 import About from './pages/About';
+import IAHub from './pages/IAHub';
+import EEHub from './pages/EEHub';
+import TOKHub from './pages/TOKHub';
+import CASHub from './pages/CASHub';
+import TaskManager from './pages/TaskManager';
+import SubjectList from './pages/SubjectList';
+import SubjectPage from './pages/SubjectPage';
+import PastPaperPractice from './pages/PastPaperPractice';
 import './App.css';
 
 export default function App() {
@@ -29,6 +37,14 @@ export default function App() {
           <Route path="tests/:id" element={<TestEditor />} />
           <Route path="tests/:id/take" element={<TestTaker />} />
           <Route path="about" element={<About />} />
+          <Route path="tasks" element={<TaskManager />} />
+          <Route path="subjects" element={<SubjectList />} />
+          <Route path="subjects/:id" element={<SubjectPage />} />
+          <Route path="past-papers" element={<PastPaperPractice />} />
+          <Route path="ia" element={<IAHub />} />
+          <Route path="ee" element={<EEHub />} />
+          <Route path="tok" element={<TOKHub />} />
+          <Route path="cas" element={<CASHub />} />
         </Route>
       </Routes>
     </BrowserRouter>

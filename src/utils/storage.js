@@ -2,6 +2,8 @@ const STORAGE_KEYS = {
   DECKS: 'flashcards_decks',
   STUDY_GUIDES: 'flashcards_study_guides',
   PRACTICE_TESTS: 'flashcards_practice_tests',
+  SUBJECTS: 'ib_subjects',
+  TASKS: 'ib_tasks',
 };
 
 function load(key) {
@@ -118,4 +120,70 @@ export function deletePracticeTest(id) {
   const tests = getPracticeTests().filter((t) => t.id !== id);
   save(STORAGE_KEYS.PRACTICE_TESTS, tests);
   return tests;
+}
+
+// --- IB Subjects ---
+
+export function getSubjects() {
+  return load(STORAGE_KEYS.SUBJECTS);
+}
+
+export function getSubject(id) {
+  return getSubjects().find((s) => s.id === id) || null;
+}
+
+export function saveSubject(subject) {
+  const subjects = getSubjects();
+  const index = subjects.findIndex((s) => s.id === subject.id);
+  if (index >= 0) {
+    subjects[index] = { ...subject, updatedAt: new Date().toISOString() };
+  } else {
+    subjects.push({
+      ...subject,
+      id: subject.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.SUBJECTS, subjects);
+  return subjects;
+}
+
+export function deleteSubject(id) {
+  const subjects = getSubjects().filter((s) => s.id !== id);
+  save(STORAGE_KEYS.SUBJECTS, subjects);
+  return subjects;
+}
+
+// --- IB Tasks / Deadlines ---
+
+export function getTasks() {
+  return load(STORAGE_KEYS.TASKS);
+}
+
+export function getTask(id) {
+  return getTasks().find((t) => t.id === id) || null;
+}
+
+export function saveTask(task) {
+  const tasks = getTasks();
+  const index = tasks.findIndex((t) => t.id === task.id);
+  if (index >= 0) {
+    tasks[index] = { ...task, updatedAt: new Date().toISOString() };
+  } else {
+    tasks.push({
+      ...task,
+      id: task.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.TASKS, tasks);
+  return tasks;
+}
+
+export function deleteTask(id) {
+  const tasks = getTasks().filter((t) => t.id !== id);
+  save(STORAGE_KEYS.TASKS, tasks);
+  return tasks;
 }

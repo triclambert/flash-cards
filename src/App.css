@@ -237,6 +237,90 @@ body {
   font-size: 0.85rem;
 }
 
+/* ===== Deadlines ===== */
+.deadline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.deadline-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.deadline-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.deadline-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.deadline-row:last-child {
+  border-bottom: none;
+}
+
+.deadline-title {
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.deadline-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.deadline-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ===== Subject Progress ===== */
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progress-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.progress-header h4 {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.progress-percent {
+  font-weight: 700;
+  color: var(--primary);
+}
+
 /* ===== Card Grid ===== */
 .card-grid {
   display: grid;
@@ -450,6 +534,34 @@ textarea.input {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+}
+
+.syllabus-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.status-select {
+  min-width: 140px;
+}
+
+.link-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
 .empty-hint {
@@ -852,6 +964,168 @@ textarea.input {
   color: var(--text-muted);
 }
 
+/* ===== Task Manager ===== */
+.task-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.task-row h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.task-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-muted);
+}
+
+.pill-high {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.pill-medium {
+  border-color: var(--warning);
+  color: var(--warning);
+  background: rgba(217, 119, 6, 0.12);
+}
+
+.pill-low {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.pill-todo {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.pill-in-progress {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(29, 78, 216, 0.08);
+}
+
+.pill-done {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+/* ===== Past Paper Practice ===== */
+.timer-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.timer-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.timer-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.timer-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.error-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 120px auto;
+  gap: 0.75rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.link-inline {
+  display: inline-flex;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.link-inline:hover {
+  text-decoration: underline;
+}
+
+.weak-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.weak-topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
+}
+
 /* ===== About Page ===== */
 .about-card {
   background: var(--bg-card);
@@ -967,6 +1241,25 @@ textarea.input {
 
   .card-editor-fields {
     grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .syllabus-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .link-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .error-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 
   .study-controls {
