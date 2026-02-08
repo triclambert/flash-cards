@@ -7,6 +7,7 @@ const STORAGE_KEYS = {
   PAST_PAPER_SESSIONS: 'ib_past_paper_sessions',
   STUDY_BLOCKS: 'ib_study_blocks',
   STUDY_GOALS: 'ib_study_goals',
+  IA_PROJECTS: 'ib_ia_projects',
 };
 
 function load(key) {
@@ -278,4 +279,33 @@ export function deleteStudyGoal(id) {
   const goals = getStudyGoals().filter((g) => g.id !== id);
   save(STORAGE_KEYS.STUDY_GOALS, goals);
   return goals;
+}
+
+// --- IA Manager ---
+
+export function getIAProjects() {
+  return load(STORAGE_KEYS.IA_PROJECTS);
+}
+
+export function saveIAProject(project) {
+  const projects = getIAProjects();
+  const index = projects.findIndex((p) => p.id === project.id);
+  if (index >= 0) {
+    projects[index] = { ...project, updatedAt: new Date().toISOString() };
+  } else {
+    projects.push({
+      ...project,
+      id: project.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.IA_PROJECTS, projects);
+  return projects;
+}
+
+export function deleteIAProject(id) {
+  const projects = getIAProjects().filter((p) => p.id !== id);
+  save(STORAGE_KEYS.IA_PROJECTS, projects);
+  return projects;
 }
