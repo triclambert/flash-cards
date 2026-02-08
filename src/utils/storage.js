@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
   STUDY_GOALS: 'ib_study_goals',
   IA_PROJECTS: 'ib_ia_projects',
   EE_PROJECT: 'ib_ee_project',
+  TOK_WORKSPACE: 'ib_tok_workspace',
 };
 
 function load(key) {
@@ -326,5 +327,23 @@ export function saveEEProject(project) {
     payload.createdAt = new Date().toISOString();
   }
   save(STORAGE_KEYS.EE_PROJECT, [payload]);
+  return payload;
+}
+
+// --- TOK Workspace ---
+
+export function getTOKWorkspace() {
+  return load(STORAGE_KEYS.TOK_WORKSPACE)[0] || null;
+}
+
+export function saveTOKWorkspace(workspace) {
+  const payload = {
+    ...workspace,
+    updatedAt: new Date().toISOString(),
+  };
+  if (!workspace.createdAt) {
+    payload.createdAt = new Date().toISOString();
+  }
+  save(STORAGE_KEYS.TOK_WORKSPACE, [payload]);
   return payload;
 }
