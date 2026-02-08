@@ -1532,61 +1532,6 @@ textarea.input {
   border: 1px solid rgba(29, 78, 216, 0.2);
 }
 
-/* ===== About Page ===== */
-.about-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.about-photo-wrapper {
-  flex-shrink: 0;
-}
-
-.about-photo {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--primary);
-}
-
-.about-info h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.about-subtitle {
-  color: var(--primary);
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.about-bio {
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 0.75rem;
-}
-
-@media (max-width: 600px) {
-  .about-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .about-photo {
-    width: 140px;
-    height: 140px;
-  }
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .sidebar {

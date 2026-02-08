@@ -4,7 +4,6 @@ import {
   Layers,
   ClipboardList,
   Home,
-  User,
   GraduationCap,
   FileCheck,
   Sigma,
@@ -111,16 +110,6 @@ export default function Layout() {
             </NavLink>
           </li>
         </ul>
-        <div className="nav-bottom">
-          <ul className="nav-links">
-            <li>
-              <NavLink to="/about">
-                <User size={20} />
-                <span>About</span>
-              </NavLink>
-            </li>
-          </ul>
-        </div>
       </nav>
       <main className="main-content">
         <Outlet />

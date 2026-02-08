@@ -10,7 +10,6 @@ import GuideViewer from './pages/GuideViewer';
 import TestList from './pages/TestList';
 import TestEditor from './pages/TestEditor';
 import TestTaker from './pages/TestTaker';
-import About from './pages/About';
 import IAHub from './pages/IAHub';
 import EEHub from './pages/EEHub';
 import TOKHub from './pages/TOKHub';
@@ -43,7 +42,6 @@ export default function App() {
           <Route path="tests" element={<TestList />} />
           <Route path="tests/:id" element={<TestEditor />} />
           <Route path="tests/:id/take" element={<TestTaker />} />
-          <Route path="about" element={<About />} />
           <Route path="tasks" element={<TaskManager />} />
           <Route path="subjects" element={<SubjectList />} />
           <Route path="subjects/:id" element={<SubjectPage />} />
