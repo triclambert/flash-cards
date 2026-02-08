@@ -9,6 +9,7 @@ import {
   FileCheck,
   Sigma,
   CalendarCheck,
+  Clock,
 } from 'lucide-react';
 
 export default function Layout() {
@@ -30,6 +31,12 @@ export default function Layout() {
             <NavLink to="/decks">
               <Layers size={20} />
               <span>Flash Cards</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/daily-review">
+              <Clock size={20} />
+              <span>Daily Review</span>
             </NavLink>
           </li>
           <li>

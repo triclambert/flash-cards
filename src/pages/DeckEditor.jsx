@@ -1,7 +1,33 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Plus, Trash2, Save, ArrowLeft } from 'lucide-react';
+import { Plus, Trash2, Save, ArrowLeft, Image } from 'lucide-react';
 import { getDeck, saveDeck, generateId } from '../utils/storage';
+
+function createSrs() {
+  return {
+    intervalDays: 0,
+    ease: 2.5,
+    repetitions: 0,
+    dueDate: new Date().toISOString(),
+    lastReviewed: null,
+  };
+}
+
+function normalizeCard(card) {
+  return {
+    ...card,
+    tags: Array.isArray(card.tags) ? card.tags : [],
+    imageUrl: card.imageUrl || '',
+    srs: card.srs || createSrs(),
+  };
+}
+
+function parseTags(value) {
+  return value
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+}
 
 export default function DeckEditor() {
   const { id } = useParams();
@@ -11,10 +37,20 @@ export default function DeckEditor() {
   const existing = isNew ? null : getDeck(id);
   const [name, setName] = useState(existing?.name || '');
   const [description, setDescription] = useState(existing?.description || '');
-  const [cards, setCards] = useState(existing?.cards || []);
+  const [cards, setCards] = useState((existing?.cards || []).map(normalizeCard));
 
   function addCard() {
-    setCards([...cards, { id: generateId(), front: '', back: '' }]);
+    setCards([
+      ...cards,
+      {
+        id: generateId(),
+        front: '',
+        back: '',
+        tags: [],
+        imageUrl: '',
+        srs: createSrs(),
+      },
+    ]);
   }
 
   function updateCard(cardId, field, value) {
@@ -116,6 +152,40 @@ export default function DeckEditor() {
                 />
               </div>
             </div>
+
+            <div className="card-editor-fields">
+              <div className="form-group">
+                <label>Tags (subject, topic)</label>
+                <input
+                  type="text"
+                  value={card.tags?.join(', ') || ''}
+                  onChange={(e) =>
+                    updateCard(card.id, 'tags', parseTags(e.target.value))
+                  }
+                  placeholder="e.g. Biology, Cells, HL"
+                  className="input"
+                />
+              </div>
+              <div className="form-group">
+                <label>Image URL (optional)</label>
+                <div className="input-with-icon">
+                  <Image size={16} />
+                  <input
+                    type="url"
+                    value={card.imageUrl || ''}
+                    onChange={(e) => updateCard(card.id, 'imageUrl', e.target.value)}
+                    placeholder="https://"
+                    className="input"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {card.imageUrl && (
+              <div className="card-image-preview">
+                <img src={card.imageUrl} alt="Card visual" />
+              </div>
+            )}
           </div>
         ))}
       </div>

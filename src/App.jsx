@@ -20,6 +20,7 @@ import SubjectList from './pages/SubjectList';
 import SubjectPage from './pages/SubjectPage';
 import PastPaperPractice from './pages/PastPaperPractice';
 import CommandTerms from './pages/CommandTerms';
+import DailyReview from './pages/DailyReview';
 import './App.css';
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="subjects/:id" element={<SubjectPage />} />
           <Route path="past-papers" element={<PastPaperPractice />} />
           <Route path="command-terms" element={<CommandTerms />} />
+          <Route path="daily-review" element={<DailyReview />} />
           <Route path="ia" element={<IAHub />} />
           <Route path="ee" element={<EEHub />} />
           <Route path="tok" element={<TOKHub />} />

@@ -1,7 +1,13 @@
-import { useState, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, RotateCcw, ChevronLeft, ChevronRight, Shuffle } from 'lucide-react';
-import { getDeck, saveDeck } from '../utils/storage';
+import { useCallback, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowLeft,
+  RotateCcw,
+  ChevronLeft,
+  ChevronRight,
+  Shuffle,
+} from 'lucide-react';
+import { getDecks, saveDeck } from '../utils/storage';
 
 function createSrs() {
   return {
@@ -50,21 +56,38 @@ function updateSrs(card, isCorrect) {
   };
 }
 
+function isDue(card) {
+  if (!card.srs?.dueDate) return true;
+  return new Date(card.srs.dueDate) <= new Date();
+}
+
 function shuffleArray(arr) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
+  for (let i = a.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
 }
 
-export default function StudyMode() {
-  const { id } = useParams();
+export default function DailyReview() {
   const navigate = useNavigate();
-  const deck = getDeck(id);
+  const decks = getDecks();
 
-  const [cards, setCards] = useState((deck?.cards || []).map(normalizeCard));
+  const dueCards = useMemo(() => {
+    return decks.flatMap((deck) =>
+      (deck.cards || [])
+        .map(normalizeCard)
+        .filter(isDue)
+        .map((card) => ({
+          ...card,
+          deckId: deck.id,
+          deckName: deck.name,
+        }))
+    );
+  }, [decks]);
+
+  const [cards, setCards] = useState(dueCards);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState(new Set());
@@ -73,43 +96,29 @@ export default function StudyMode() {
   const card = cards[currentIndex];
 
   const handleShuffle = useCallback(() => {
-    setCards(shuffleArray((deck?.cards || []).map(normalizeCard)));
+    setCards(shuffleArray(dueCards));
     setCurrentIndex(0);
     setFlipped(false);
     setKnown(new Set());
     setUnknown(new Set());
-  }, [deck]);
+  }, [dueCards]);
 
-  if (!deck || cards.length === 0) {
-    return (
-      <div className="page">
-        <button className="btn btn-ghost" onClick={() => navigate('/decks')}>
-          <ArrowLeft size={18} /> Back to Decks
-        </button>
-        <div className="empty-state">
-          <p>This deck has no cards to study.</p>
-        </div>
-      </div>
-    );
-  }
-
-  const allReviewed = known.size + unknown.size === cards.length;
-
-  function persistCards(updatedCards) {
+  function persistCard(updatedCard) {
+    const deck = decks.find((d) => d.id === updatedCard.deckId);
     if (!deck) return;
-    saveDeck({ ...deck, cards: updatedCards });
+    const nextCards = (deck.cards || []).map((c) =>
+      c.id === updatedCard.id ? updatedCard : c
+    );
+    saveDeck({ ...deck, cards: nextCards });
   }
 
   function reviewCard(isCorrect) {
-    const targetId = card?.id;
-    if (!targetId) return;
-    setCards((prev) => {
-      const updated = prev.map((c) =>
-        c.id === targetId ? updateSrs(c, isCorrect) : c
-      );
-      persistCards(updated);
-      return updated;
-    });
+    if (!card) return;
+    const updated = updateSrs(card, isCorrect);
+    persistCard(updated);
+    setCards((prev) =>
+      prev.map((c) => (c.id === updated.id ? { ...updated, deckId: c.deckId } : c))
+    );
   }
 
   function markKnown() {
@@ -155,13 +164,28 @@ export default function StudyMode() {
     setUnknown(new Set());
   }
 
+  if (cards.length === 0) {
+    return (
+      <div className="page">
+        <button className="btn btn-ghost" onClick={() => navigate('/')}>
+          <ArrowLeft size={18} /> Back
+        </button>
+        <div className="empty-state">
+          <p>No cards are due today.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const allReviewed = known.size + unknown.size === cards.length;
+
   return (
     <div className="page study-page">
       <div className="page-header">
-        <button className="btn btn-ghost" onClick={() => navigate(`/decks/${id}`)}>
+        <button className="btn btn-ghost" onClick={() => navigate('/')}>
           <ArrowLeft size={18} /> Back
         </button>
-        <h2>Studying: {deck.name}</h2>
+        <h2>Daily Review</h2>
       </div>
 
       <div className="study-progress">
@@ -182,14 +206,14 @@ export default function StudyMode() {
 
       {allReviewed ? (
         <div className="study-complete">
-          <h3>Session Complete!</h3>
+          <h3>Daily Review Complete!</h3>
           <p>
             You knew {known.size} of {cards.length} cards (
             {Math.round((known.size / cards.length) * 100)}%)
           </p>
           <div className="study-complete-actions">
             <button className="btn btn-primary" onClick={reset}>
-              <RotateCcw size={18} /> Study Again
+              <RotateCcw size={18} /> Review Again
             </button>
             <button className="btn" onClick={() => navigate('/decks')}>
               Back to Decks
@@ -209,7 +233,7 @@ export default function StudyMode() {
                 {card.imageUrl && (
                   <img className="flashcard-image" src={card.imageUrl} alt="" />
                 )}
-                <span className="flashcard-hint">Click to flip</span>
+                <span className="flashcard-hint">From {card.deckName}</span>
               </div>
               <div className="flashcard-back">
                 <span className="flashcard-label">Back</span>
@@ -217,7 +241,7 @@ export default function StudyMode() {
                 {card.imageUrl && (
                   <img className="flashcard-image" src={card.imageUrl} alt="" />
                 )}
-                <span className="flashcard-hint">Click to flip</span>
+                <span className="flashcard-hint">From {card.deckName}</span>
               </div>
             </div>
           </div>
