@@ -4,6 +4,7 @@ const STORAGE_KEYS = {
   PRACTICE_TESTS: 'flashcards_practice_tests',
   SUBJECTS: 'ib_subjects',
   TASKS: 'ib_tasks',
+  PAST_PAPER_SESSIONS: 'ib_past_paper_sessions',
 };
 
 function load(key) {
@@ -186,4 +187,37 @@ export function deleteTask(id) {
   const tasks = getTasks().filter((t) => t.id !== id);
   save(STORAGE_KEYS.TASKS, tasks);
   return tasks;
+}
+
+// --- Past Paper Practice ---
+
+export function getPastPaperSessions() {
+  return load(STORAGE_KEYS.PAST_PAPER_SESSIONS);
+}
+
+export function getPastPaperSession(id) {
+  return getPastPaperSessions().find((s) => s.id === id) || null;
+}
+
+export function savePastPaperSession(session) {
+  const sessions = getPastPaperSessions();
+  const index = sessions.findIndex((s) => s.id === session.id);
+  if (index >= 0) {
+    sessions[index] = { ...session, updatedAt: new Date().toISOString() };
+  } else {
+    sessions.push({
+      ...session,
+      id: session.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.PAST_PAPER_SESSIONS, sessions);
+  return sessions;
+}
+
+export function deletePastPaperSession(id) {
+  const sessions = getPastPaperSessions().filter((s) => s.id !== id);
+  save(STORAGE_KEYS.PAST_PAPER_SESSIONS, sessions);
+  return sessions;
 }
