@@ -5,6 +5,8 @@ const STORAGE_KEYS = {
   SUBJECTS: 'ib_subjects',
   TASKS: 'ib_tasks',
   PAST_PAPER_SESSIONS: 'ib_past_paper_sessions',
+  STUDY_BLOCKS: 'ib_study_blocks',
+  STUDY_GOALS: 'ib_study_goals',
 };
 
 function load(key) {
@@ -220,4 +222,60 @@ export function deletePastPaperSession(id) {
   const sessions = getPastPaperSessions().filter((s) => s.id !== id);
   save(STORAGE_KEYS.PAST_PAPER_SESSIONS, sessions);
   return sessions;
+}
+
+// --- Study Planner ---
+
+export function getStudyBlocks() {
+  return load(STORAGE_KEYS.STUDY_BLOCKS);
+}
+
+export function saveStudyBlock(block) {
+  const blocks = getStudyBlocks();
+  const index = blocks.findIndex((b) => b.id === block.id);
+  if (index >= 0) {
+    blocks[index] = { ...block, updatedAt: new Date().toISOString() };
+  } else {
+    blocks.push({
+      ...block,
+      id: block.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.STUDY_BLOCKS, blocks);
+  return blocks;
+}
+
+export function deleteStudyBlock(id) {
+  const blocks = getStudyBlocks().filter((b) => b.id !== id);
+  save(STORAGE_KEYS.STUDY_BLOCKS, blocks);
+  return blocks;
+}
+
+export function getStudyGoals() {
+  return load(STORAGE_KEYS.STUDY_GOALS);
+}
+
+export function saveStudyGoal(goal) {
+  const goals = getStudyGoals();
+  const index = goals.findIndex((g) => g.id === goal.id);
+  if (index >= 0) {
+    goals[index] = { ...goal, updatedAt: new Date().toISOString() };
+  } else {
+    goals.push({
+      ...goal,
+      id: goal.id || generateId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  save(STORAGE_KEYS.STUDY_GOALS, goals);
+  return goals;
+}
+
+export function deleteStudyGoal(id) {
+  const goals = getStudyGoals().filter((g) => g.id !== id);
+  save(STORAGE_KEYS.STUDY_GOALS, goals);
+  return goals;
 }

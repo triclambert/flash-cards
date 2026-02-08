@@ -10,6 +10,7 @@ import {
   Sigma,
   CalendarCheck,
   Clock,
+  Timer,
 } from 'lucide-react';
 
 export default function Layout() {
@@ -37,6 +38,12 @@ export default function Layout() {
             <NavLink to="/daily-review">
               <Clock size={20} />
               <span>Daily Review</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/study-planner">
+              <Timer size={20} />
+              <span>Study Planner</span>
             </NavLink>
           </li>
           <li>

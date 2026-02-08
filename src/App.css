@@ -321,6 +321,20 @@ body {
   color: var(--primary);
 }
 
+/* ===== Study Planner ===== */
+.planner-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
 /* ===== Card Grid ===== */
 .card-grid {
   display: grid;
