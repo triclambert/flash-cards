@@ -493,6 +493,100 @@ textarea.input {
   border-top: 1px solid var(--border);
 }
 
+/* ===== Task Manager ===== */
+.task-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  flex-wrap: wrap;
+}
+
+.task-row h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.task-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-muted);
+}
+
+.pill-high {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.pill-medium {
+  border-color: var(--warning);
+  color: var(--warning);
+  background: rgba(217, 119, 6, 0.12);
+}
+
+.pill-low {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.pill-todo {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.pill-in-progress {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(29, 78, 216, 0.08);
+}
+
+.pill-done {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-bg);
+}
+
 /* ===== Card / Section Editor ===== */
 .cards-section {
   margin-top: 1.5rem;
