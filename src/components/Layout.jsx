@@ -13,6 +13,7 @@ import {
   Timer,
   BarChart3,
   FileText,
+  CheckCircle,
 } from 'lucide-react';
 
 export default function Layout() {
@@ -58,6 +59,12 @@ export default function Layout() {
             <NavLink to="/templates">
               <FileText size={20} />
               <span>Templates</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/cas-progress">
+              <CheckCircle size={20} />
+              <span>CAS Progress</span>
             </NavLink>
           </li>
           <li>

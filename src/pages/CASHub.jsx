@@ -22,6 +22,7 @@ function emptyLog() {
     outcomes: [],
     evidence: '',
     supervisorConfirmed: false,
+    isProject: false,
   };
 }
 
@@ -105,6 +106,17 @@ export default function CASHub() {
               className="input"
               value={form.supervisorConfirmed ? 'yes' : 'no'}
               onChange={(e) => handleChange('supervisorConfirmed', e.target.value === 'yes')}
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>CAS Project</label>
+            <select
+              className="input"
+              value={form.isProject ? 'yes' : 'no'}
+              onChange={(e) => handleChange('isProject', e.target.value === 'yes')}
             >
               <option value="no">No</option>
               <option value="yes">Yes</option>
