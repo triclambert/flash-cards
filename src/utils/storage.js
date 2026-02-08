@@ -8,6 +8,7 @@ const STORAGE_KEYS = {
   STUDY_BLOCKS: 'ib_study_blocks',
   STUDY_GOALS: 'ib_study_goals',
   IA_PROJECTS: 'ib_ia_projects',
+  EE_PROJECT: 'ib_ee_project',
 };
 
 function load(key) {
@@ -308,4 +309,22 @@ export function deleteIAProject(id) {
   const projects = getIAProjects().filter((p) => p.id !== id);
   save(STORAGE_KEYS.IA_PROJECTS, projects);
   return projects;
+}
+
+// --- Extended Essay ---
+
+export function getEEProject() {
+  return load(STORAGE_KEYS.EE_PROJECT)[0] || null;
+}
+
+export function saveEEProject(project) {
+  const payload = {
+    ...project,
+    updatedAt: new Date().toISOString(),
+  };
+  if (!project.createdAt) {
+    payload.createdAt = new Date().toISOString();
+  }
+  save(STORAGE_KEYS.EE_PROJECT, [payload]);
+  return payload;
 }
