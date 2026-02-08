@@ -11,6 +11,7 @@ import {
   CalendarCheck,
   Clock,
   Timer,
+  BarChart3,
 } from 'lucide-react';
 
 export default function Layout() {
@@ -44,6 +45,12 @@ export default function Layout() {
             <NavLink to="/study-planner">
               <Timer size={20} />
               <span>Study Planner</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/analytics">
+              <BarChart3 size={20} />
+              <span>Analytics</span>
             </NavLink>
           </li>
           <li>

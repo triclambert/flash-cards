@@ -22,6 +22,7 @@ import PastPaperPractice from './pages/PastPaperPractice';
 import CommandTerms from './pages/CommandTerms';
 import DailyReview from './pages/DailyReview';
 import StudyPlanner from './pages/StudyPlanner';
+import ProgressAnalytics from './pages/ProgressAnalytics';
 import './App.css';
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="command-terms" element={<CommandTerms />} />
           <Route path="daily-review" element={<DailyReview />} />
           <Route path="study-planner" element={<StudyPlanner />} />
+          <Route path="analytics" element={<ProgressAnalytics />} />
           <Route path="ia" element={<IAHub />} />
           <Route path="ee" element={<EEHub />} />
           <Route path="tok" element={<TOKHub />} />
